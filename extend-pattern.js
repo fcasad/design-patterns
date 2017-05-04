@@ -1,5 +1,5 @@
-// the extend pattern is used to keep copy properties of an object to another.
-// the native Object.assign returns a shallow copy, while this is a naive implementation on a deep clone
+// the extend (mixin) pattern is used to copy properties from one object to another.
+// Object.assign returns a shallow copy, while this is a naive implementation on a deep clone
 
 function deepExtend (target, ...sources) {
   sources.forEach(source => {
