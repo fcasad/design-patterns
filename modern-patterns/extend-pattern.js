@@ -3,20 +3,20 @@
 
 function deepExtend (target, ...sources) {
   sources.forEach(source => {
-    //iterate over object using a 'for of' loop to avoid copying from prototype
+    //iterate over object keys to avoid copying from prototype
     // could also use 'for in' loop along with Object.hasOwnProperty()
-    for (let prop of source) {
-      // check whether prop is nested obj
-      if (typeof source[prop] === 'object') {
-        // check whether source prop is arr, returns empty structure
-        target[prop] = Array.isArray(source[prop]) ? [] : {};
+    Object.keys(source).forEach(key => {
+      // check whether key is nested obj
+      if (typeof source[key] === 'object') {
+        // check whether source key is arr, returns empty structure
+        target[key] = Array.isArray(source[key]) ? [] : {};
         // recursively call deepExtend on nested arr or obj
-        deepExtend(target[prop], source[prop]);
-        // if prop isn't an obj, simply add to target
+        deepExtend(target[key], source[key]);
+        // if key isn't an obj, simply add to target
       } else {
-        target[prop] = source[prop];
+        target[key] = source[key];
       }
-    }
+    });
   })
   return target;
 }
@@ -36,4 +36,4 @@ const employee = { salary: "$45,000" };
 deepExtend(employee, person);
 
 //or
-const john = deepExtend({}, person, {name: 'John', email: 'thedoe@fake.email'}) 
+const john = deepExtend({}, person, {name: 'John', interests: ['netflix', 'programming', 'sports']}) 

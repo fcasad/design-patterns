@@ -19,7 +19,7 @@ Person.prototype = {
   // restore Person's state by overwriting props, using memento
   dehydrate(memento) {
     const m = JSON.parse(memento);
-    for (let prop of m) this[prop] = m[prop];
+    Object.keys(m).forEach(key => this[key] = m[key]);
   }
 }
 

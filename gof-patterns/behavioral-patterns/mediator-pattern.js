@@ -35,11 +35,11 @@ function Chatroom() {
         to.receive(message, from)
       }
       else {
-        for (prop of users) {
-          if (users[prop] != from) {
-            users[prop].receive(message, from);
+        Object.keys(users).forEach(key => {
+          if (users[key] != from) {
+            users[key].receive(message, from);
           }
-        }
+        });
       }
     }
   };
